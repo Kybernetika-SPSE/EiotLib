@@ -1,4 +1,4 @@
-from machine import Pin, PWM
+from machine import Pin, PWM, ADC
 from time import sleep
 import dht
 
@@ -17,7 +17,8 @@ class Board:
         'pwout': False,
         'btn': False,
         'reed': False,
-        'dht': False
+        'dht': False,
+        'adc': False
         
     }
     
@@ -223,6 +224,14 @@ class Board:
             except OSError as e:
                 print('Failed to read sensor:', e)
                 return None, None  # Return None values on failure
+            
+    def ldr_get(self):
+        if not self.pin_initialized['adc']:
+            # Initialize the DHT sensor pin
+            self.adc = ADC(0)
+            self.pin_initialized['adc'] = True
+        
+        return self.adc.read()
          
         
 
