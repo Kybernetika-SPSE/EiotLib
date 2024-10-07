@@ -1,43 +1,66 @@
-# eiotlib.py
+Usage
+Relay Control
+To set the relay state:
 
-## Overview
-`eiotlib.py` is a custom MicroPython library designed for ESP8266-based projects, particularly for IoT applications involving various sensors and actuators. This library facilitates easy interaction with hardware components like relays, buzzers, LEDs, buttons, reed switches, and DHT11 temperature and humidity sensors.
+python
+Copy code
+board.relay_set(value)  # value: True to turn on, False to turn off
+Buzzer Control
+To control the buzzer:
 
-## Features
-- Control relays and buzzers
-- Read button and reed switch states
-- Measure temperature and humidity using the DHT11 sensor
-- Control RGB LEDs and standard LEDs
-- Shift register interfacing using 74HC595
-- Initialize and manage multiple pins efficiently
+python
+Copy code
+board.buzzer_set(frequency, duration)  # frequency in Hz, duration in seconds
+Play Melody
+To play a predefined melody:
 
-## Installation
-1. Clone the repository or download the `eiotlib.py` file.
-2. Upload the `eiotlib.py` file to your ESP8266 board using an appropriate tool (e.g., `mpfshell`, `ampy`, or `rshell`).
+python
+Copy code
+board.play_melody()
+LED Control
+To set RGB LED values:
 
-## Usage
+python
+Copy code
+board.rgb_set(r, g, b)  # r, g, b: Boolean values (True/False)
+To control regular LEDs:
 
-### Example Code
-```python
-from eiotlib import Board
+python
+Copy code
+board.leds_set(r, g, y)  # r, g, y: Boolean values (True/False)
+Power Output Control
+To set the power output:
 
-# Initialize the board
-board = Board()
+python
+Copy code
+board.pwout_set(value)  # value: True to enable, False to disable
+Button and Reed Switch States
+To read the button state:
 
-# Set relay on
-board.relay_set(1)
+python
+Copy code
+button_state = board.button_get()  # Returns the state of the button (1 or 0)
+To read the reed switch state:
 
-# Control the buzzer
-board.buzzer_set(frequency=1000, duration=1)
+python
+Copy code
+reed_state = board.reed_get()  # Returns the state of the reed switch (1 or 0)
+DHT Sensor
+To read temperature and humidity from a DHT11 sensor:
 
-# Read DHT sensor
-temp, humidity = board.dht_get()
-print("Temperature:", temp, "°C")
-print("Humidity:", humidity, "%")
+python
+Copy code
+temp, humidity = board.dht_get()  # Returns temperature and humidity values
+Photoresistor
+To read the value from a photoresistor (LDR):
 
-# Get reed switch value
-reed_value = board.reed_get()
-print("Reed Switch State:", reed_value)
+python
+Copy code
+ldr_value = board.ldr_get()  # Returns the ADC value from the photoresistor
+License
+This library is licensed under the MIT License. Feel free to use it in your projects!
 
-# Control LEDs
-board.leds_set(r=1, g=0, y=0)  # Turn on red LED
+typescript
+Copy code
+
+You can save this content in a file named `README.md`. Let me know if you need any further modifications!
