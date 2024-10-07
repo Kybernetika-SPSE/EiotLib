@@ -1,66 +1,98 @@
-Usage
-Relay Control
-To set the relay state:
+# eiotlib.py - MicroPython Library
 
-python
-Copy code
-board.relay_set(value)  # value: True to turn on, False to turn off
-Buzzer Control
-To control the buzzer:
+`eiotlib.py` is a custom MicroPython library designed for managing various hardware components connected to a board, such as relays, buzzers, LEDs, buttons, and a photoresistor (LDR). The library abstracts the control of these components through a high-level interface.
 
-python
-Copy code
-board.buzzer_set(frequency, duration)  # frequency in Hz, duration in seconds
-Play Melody
-To play a predefined melody:
+## Features
 
-python
-Copy code
-board.play_melody()
-LED Control
-To set RGB LED values:
+- **Relay control:** Toggle a relay using a specific pin.
+- **Buzzer control:** Control the buzzer with custom frequency and duration.
+- **Play melodies:** Play predefined melodies using the buzzer.
+- **LED control:** Manage red, green, blue, and yellow LEDs.
+- **Button state reading:** Retrieve the state of a button connected to the board.
+- **Photoresistor reading:** Read values from an LDR to measure light intensity.
 
-python
-Copy code
-board.rgb_set(r, g, b)  # r, g, b: Boolean values (True/False)
-To control regular LEDs:
+## Pin Definitions
 
-python
-Copy code
-board.leds_set(r, g, y)  # r, g, y: Boolean values (True/False)
-Power Output Control
-To set the power output:
+The pin definitions used for this board are configured according to the BOARD_TYPE (currently set to 1). Below are the pin mappings for the components:
 
-python
-Copy code
-board.pwout_set(value)  # value: True to enable, False to disable
-Button and Reed Switch States
-To read the button state:
+| Component | Pin Assignment |
+| --------- | -------------- |
+| Reed Pin | 16 |
+| Wake Pin | 16 |
+| SDA Pin | 5 |
+| DHT Pin | 5 |
+| Latch Pin | GPIO 15 |
+| SCK Pin | GPIO 4 |
+| Data Pin | GPIO 5 |
+| Buzzer Pin | 0 |
+| Function Button | 0 |
+| Red LED Pin | GPIO 12 |
+| Yellow LED Pin | GPIO 14 |
+| Blue LED Pin | GPIO 14 |
+| Green LED Pin | GPIO 2 |
+| Power Output Pin | GPIO 13 |
+| Button Pin | GPIO 15 |
+| SCL Pin | GPIO 15 |
+| Light Sensor Pin | GPIO 2 |
+| LED Switch Pin | 0 |
+| Relay Pin | 1 |
 
-python
-Copy code
-button_state = board.button_get()  # Returns the state of the button (1 or 0)
-To read the reed switch state:
+### Constants
 
-python
-Copy code
-reed_state = board.reed_get()  # Returns the state of the reed switch (1 or 0)
-DHT Sensor
-To read temperature and humidity from a DHT11 sensor:
+The following constants are defined for managing various hardware components:
 
-python
-Copy code
-temp, humidity = board.dht_get()  # Returns temperature and humidity values
-Photoresistor
-To read the value from a photoresistor (LDR):
+- `BUZZER`: `0b00000001`
+- `LEDS`: `0b00001110`
+- `RGB`: `0b01001110`
+- `BUTTON`: `0b00100000`
+- `PWOUT`: `0b00100000`
+- `RELAY`: `0b10000000`
+- `ALL`: `0b11111111`
+- `OFF`: `0b00000000`
 
-python
-Copy code
-ldr_value = board.ldr_get()  # Returns the ADC value from the photoresistor
-License
-This library is licensed under the MIT License. Feel free to use it in your projects!
+### Pin Initialization
 
-typescript
-Copy code
+The library includes logic to ensure pins are initialized only once, preventing errors in hardware manipulation. Each component's pin will be initialized the first time it is accessed.
 
-You can save this content in a file named `README.md`. Let me know if you need any further modifications!
+## Usage
+
+Here are some examples of how to use the `eiotlib.py` library to control components:
+
+### Relay Control
+
+```python
+# Initialize the board
+board = Board()
+
+# Set the relay to ON (1) or OFF (0)
+board.relay_set(1)  # Turn the relay on
+board.relay_set(0)  # Turn the relay off
+```
+
+### Buzzer Control
+
+```python
+# Set the buzzer to a specific frequency (in Hz) and duration (in seconds)
+board.buzzer_set(1000, 1)  # Play a tone at 1000 Hz for 1 second
+```
+
+
+### Read Button State
+
+```python
+# Get the current state of the button (1 if pressed, 0 otherwise)
+state = board.button_get()
+print("Button state:", state)
+```
+
+### Read Light Intensity (LDR)
+
+```python
+# Read the value from the photoresistor (light sensor)
+light_value = board.ldr_get()
+print("Light intensity:", light_value)
+```
+
+## License
+
+This project is licensed under the MIT License.
