@@ -92,6 +92,64 @@ print("Button state:", state)
 light_value = board.ldr_get()
 print("Light intensity:", light_value)
 ```
+## Installation Guide
+
+To use the `eiotlib.py` library in your MicroPython project, follow these steps:
+
+### Prerequisites
+
+- Ensure you have MicroPython installed on your microcontroller (e.g., ESP8266 or ESP32).
+- You will need a way to upload files to the microcontroller, such as:
+  - [Thonny IDE](https://thonny.org/)
+  - [ampy](https://github.com/scientifichackers/ampy)
+  - [rshell](https://github.com/dhylands/rshell)
+
+### Steps
+
+1. Download the `eiotlib.py` file.
+
+2. Connect your microcontroller to your computer via USB.
+
+3. Open your preferred MicroPython file uploader (Thonny IDE, ampy, rshell).
+
+4. Create a directory called `lib` in the root of your microcontroller's filesystem if it doesn't already exist. This is where MicroPython libraries should be stored.
+
+   Example using `rshell`:
+   ```bash
+   rshell
+   mkdir /pyboard/lib
+   ```
+
+5. Upload the `eiotlib.py` file to the `lib` directory on your microcontroller.
+
+   Example using `rshell`:
+   ```bash
+   cp eiotlib.py /pyboard/lib/
+   ```
+
+   Example using `ampy`:
+   ```bash
+   ampy put eiotlib.py /lib/eiotlib.py
+   ```
+
+6. Once the file is uploaded, you can import and use the `eiotlib.py` library in your MicroPython scripts.
+
+### Example
+
+After installation, you can import and use the library in your main Python script like this:
+
+```python
+from eiotlib import Board
+
+# Initialize the board
+board = Board()
+
+# Control the relay, buzzer, and more!
+```
+
+Now you're ready to use the `eiotlib.py` library in your MicroPython projects!
+
+## Made by Lukaro
 
 ## License
 
